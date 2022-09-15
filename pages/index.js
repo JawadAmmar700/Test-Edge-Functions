@@ -2,7 +2,23 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export const config = {
+  runtime: 'experimental-edge',
+}
+
+export const getServerSideProps = async () => {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos')
+  const data = await res.json()
+
+  return {
+    props: {
+      data
+    },
+  }
+}
+
+
+export default function Home({data}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -51,6 +67,15 @@ export default function Home() {
           </a>
         </div>
       </main>
+
+      {
+        data.map((item) => (
+          <div key={item.id}>
+            <h1>{item.title}</h1>
+          </div>
+        ))
+        
+      }
 
       <footer className={styles.footer}>
         <a
