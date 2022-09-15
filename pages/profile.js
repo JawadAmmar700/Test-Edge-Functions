@@ -1,5 +1,6 @@
 import React from 'react'
 import { useUser } from '@auth0/nextjs-auth0';
+import Link from 'next/link';
 
 const Profile = () => {
     const { user, error, isLoading } = useUser();
@@ -13,9 +14,9 @@ const Profile = () => {
           <img src={user.picture} alt={user.name} />
           <h2>{user.name}</h2>
           <p>{user.email}</p>
-          <a href="/api/auth/logout">Logout</a>
+          <Link href="/api/auth/logout">Logout</Link>
         </div>):
-        <a href="/api/auth/login">Login</a>
+        <Link href="/api/auth/login">Login</Link>
       }</div>
   )
 }
