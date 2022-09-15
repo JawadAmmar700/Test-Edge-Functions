@@ -13,9 +13,9 @@ const Profile = () => {
           <img src={user.picture} alt={user.name} />
           <h2>{user.name}</h2>
           <p>{user.email}</p>
-          <h1><a href="/api/auth/logout">Logout</a></h1>
+          <a href="/api/auth/logout">Logout</a>
         </div>):
-        <h1><a href="/api/auth/login">Login</a></h1>
+        <a href="/api/auth/login">Login</a>
       }</div>
   )
 }
