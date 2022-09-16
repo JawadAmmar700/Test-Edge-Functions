@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useAuth } from '@clerk/nextjs';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -19,7 +20,10 @@ export const getServerSideProps = async () => {
 
 
 export default function Home({data}) {
-
+  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  if (!isLoaded || !userId) {
+    return null;
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -29,15 +33,15 @@ export default function Home({data}) {
       </Head>
 
       <main className={styles.main}>
+      
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-      
+        {userId}
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
-
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
